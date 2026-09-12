@@ -50,4 +50,4 @@ async def setup(ctx):
 
 
 if __name__ == "__main__":
-    bot.run("MTU0ODMxOTczNDYzNzAwNjk2MQ.GcvLVb.XziAQTGA-zld9v9URQV9HvXIM2X3qUfrBqxc5A")
+    bot.run("DISCORD_TOKEM")
