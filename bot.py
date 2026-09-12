@@ -5,7 +5,7 @@ from discord.ext import commands
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-TOKEN = "TOKEN_CUA_BAN"
+TOKEN = "DISCORD_TOKEN"
 
 @bot.event
 async def on_ready():
